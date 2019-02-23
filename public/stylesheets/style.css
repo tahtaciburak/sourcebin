@@ -1,0 +1,15 @@
+body {
+  height: 100%;
+}
+
+.main-content{
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.text-area{
+  width: 100%;
+  height: 88vh;
+  border: 1px solid white;
+  font-family: monospace;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/style.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">  
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">SourceBin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!--<li class="nav-item active">
+          <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-lock"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-clock"></i></a>
+        </li>-->
+      </ul>
+      <button onclick="setKey('mahmut')" class="btn" href="#"><i class="fas fa-lock"></i></button>
+      <button onclick="setExpr('1000')" class="btn" href="#"><i class="fas fa-clock"></i></button>
+      <form class="form-inline my-2 my-lg-0">
+        <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+        <%if (status == "new") { %>
+          <button onclick="submitDatas()" class="btn btn-outline-success my-2 my-sm-0" ><i class="far fa-save"></i> Save</button>
+        <% } else { %>
+          <a href="http://localhost:3000/" class="btn btn-outline-info my-2 my-sm-0" ><i class="far fa-plus"></i> New</a>
+        <% } %>
+        </form>
+    </nav>
+    <div class="main-content">
+      <textarea class="text-area" onkeyup="textAreaHandler()"><%= content %></textarea>
+    </div>
+    <div class="info">
+      Kelime sayisi: 
+    </div>
+    
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script>
+    let secret = "";
+    let expiration = false;
+    let text = "";
+
+    function setKey(key){
+      secret=key;
+    }
+
+    function setExpr(expr){
+      expiration = expr;
+    }
+
+    function textAreaHandler(){
+      text=$(".text-area")[0].value;
+    }
+
+    function submitDatas(){
+      $.ajax({
+        type: "POST",
+        url: "/save",
+        data: {
+          secret:secret,
+          expiration:expiration,
+          text:text,
+        },
+        success: function(data){
+          alert(data.url);
+          window.location.replace("http://"+data.url);
+        }
+      });
+    }
+
+  </script>
+  </html>
+  
