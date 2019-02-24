@@ -8,6 +8,8 @@ router.get('/p/:key', ec.getEntryDetailPage);
 
 router.post('/save',ec.saveEntry);
 
+router.post('/decrypt',ec.decryptPaste);
+
 router.get("/all",ec.getAllEntries);
 
 module.exports = router;
