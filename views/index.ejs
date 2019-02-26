@@ -19,8 +19,8 @@
       <form class="form-inline my-2 my-lg-0">
         <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
         <%if (status == "new") { %>
-          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-lock"></i> Encryption</button>
-          <button onclick="setExpr('1000')" class="btn" href="#"><i class="fas fa-clock"></i> Expiration</button>    
+          <button type="button" class="btn" data-toggle="modal" data-target="#encModal"><i class="fas fa-lock"></i> Encryption</button>
+          <button type="button" class="btn" data-toggle="modal" data-target="#expModal"><i class="fas fa-clock"></i> Expiration</button>
           <button onclick="submitDatas()" class="btn btn-outline-success my-2 my-sm-0" ><i class="far fa-save"></i> Save</button>
         <% } else { %>
           <a href="http://localhost:3000/" class="btn btn-outline-info my-2 my-sm-0" ><i class="far fa-plus"></i> New</a>
@@ -102,11 +102,15 @@
           
 </script>
         
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="encModal" tabindex="-1" role="dialog" aria-labelledby="encModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Encrypt paste</h5>
+        <%if (status == "new") { %>
+          <h5 class="modal-title" id="encModalLabel">Encrypt paste</h5>
+        <% } else {%>
+          <h5 class="modal-title" id="encModalLabel">Decrypt paste</h5>
+        <% } %>
         </button>
       </div>
       <div class="modal-body">
@@ -126,6 +130,34 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="expModal" tabindex="-1" role="dialog" aria-labelledby="expModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="expModalLabel">Set expiration paste</h5>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="secret">Time to live for paste</label>
+            <select class="form-control" aria-placeholder="Choose expiration">
+              <option>1 Year</option>
+              <option>1 Month</option>
+              <option>1 Day</option>
+              <option>1 Hour</option>
+              <option>5 Minute</option>
+            </select>
+            <input type="password" class="form-control" id="secret" placeholder="Password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>          
+          <button type="button" onclick="setKey($('#secret').val());" data-dismiss="modal" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
           
 </html>
           
