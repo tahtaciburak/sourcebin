@@ -43,7 +43,7 @@
 
 <script>
   let secretKey = "";
-  let expiration = false;
+  let expiration = "year";
   let text = "";
   let url = "";
 
@@ -141,19 +141,18 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="secret">Time to live for paste</label>
-            <select class="form-control" aria-placeholder="Choose expiration">
-              <option>1 Year</option>
-              <option>1 Month</option>
-              <option>1 Day</option>
-              <option>1 Hour</option>
-              <option>5 Minute</option>
+            <select class="form-control" id="expirationSelect" aria-placeholder="Choose expiration">
+              <option value="year">1 Year</option>
+              <option value="month">1 Month</option>
+              <option value="day">1 Day</option>
+              <option value="hour">1 Hour</option>
+              <option value="minute">5 Minute</option>
             </select>
-            <input type="password" class="form-control" id="secret" placeholder="Password">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>          
-          <button type="button" onclick="setKey($('#secret').val());" data-dismiss="modal" class="btn btn-success">Save</button>
+          <button type="button" onclick="setExpr($('#expirationSelect').val())" data-dismiss="modal" class="btn btn-success">Save</button>
         </div>
       </div>
     </div>
