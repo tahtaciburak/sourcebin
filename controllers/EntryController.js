@@ -4,7 +4,7 @@ var db = require("../lib/db");
 var utils = require("../lib/utils");
 
 exports.getDefaultPage = function(req, res) {
-    res.render('index', { status:"new", isEncrypted: false, content: "buraaa bisey yaz" });
+    res.render('index', { status:"new", isEncrypted: false, content: "Write something here..." });
 };
 
 exports.getEntryDetailPage = function(req, res, next) {
