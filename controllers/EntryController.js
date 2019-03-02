@@ -38,12 +38,16 @@ exports.saveEntry = function(req, res, next) {
     }
 
     let secret = ""
+    let pasteText = req.body["text"]
+    console.log(pasteText)
     if (req.body["secret"]){
         secret = crypto.createHash('md5').update(req.body["secret"]).digest("hex");
-        encText = cryptoUtils.encrypt(req.body["text"],req.body["secret"])
+        pasteText = cryptoUtils.encrypt(req.body["text"],req.body["secret"])
+        
         console.log(secret)
     }
-    db.query("INSERT INTO paste(text,secret,expiration,created_at) values(? , ? , DATE_ADD(NOW(), INTERVAL "+interval+"),NOW());",[encText,secret],function(err,result){
+    
+    db.query("INSERT INTO paste(text,secret,expiration,created_at) values(? , ? , DATE_ADD(NOW(), INTERVAL "+interval+"),NOW());",[pasteText,secret],function(err,result){
         if (err) throw err; 
         res.send( { "url": req.headers.host+"/p/"+utils.id2url(result.insertId+999999) } );
     });    

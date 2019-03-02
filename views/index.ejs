@@ -29,7 +29,7 @@
         </nav>
         <div class="main-content">
           <%if (isEncrypted == false) { %>
-            <textarea class="text-area" onkeydown="textAreaHandler()"><%= content %></textarea>
+            <textarea class="text-area" onkeyup="textAreaHandler()"><%= content %></textarea>
             <% } else { %>
               <textarea class="text-area" id="decrypted"></textarea>
               <% } %>      
@@ -89,9 +89,9 @@
                   if (data.status === 200){
                     //alert(data.content)
                     $("#decrypted").val(data.content);
-                    $("#modal").hide();
+                    $("#encModal").modal('toggle');   
                   }else{
-                    alert("yeniden dene sifreyi")
+                    alert("Password Incorrect. Try Again.")
                   }
                 },
               });
