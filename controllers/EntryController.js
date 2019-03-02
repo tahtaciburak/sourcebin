@@ -40,9 +40,10 @@ exports.saveEntry = function(req, res, next) {
     let secret = ""
     if (req.body["secret"]){
         secret = crypto.createHash('md5').update(req.body["secret"]).digest("hex");
+        encText = cryptoUtils.encrypt(req.body["text"],req.body["secret"])
         console.log(secret)
     }
-    db.query("INSERT INTO paste(text,secret,expiration,created_at) values(? , ? , DATE_ADD(NOW(), INTERVAL "+interval+"),NOW());",[req.body["text"],secret],function(err,result){
+    db.query("INSERT INTO paste(text,secret,expiration,created_at) values(? , ? , DATE_ADD(NOW(), INTERVAL "+interval+"),NOW());",[encText,secret],function(err,result){
         if (err) throw err; 
         res.send( { "url": req.headers.host+"/p/"+utils.id2url(result.insertId+999999) } );
     });    
@@ -63,7 +64,7 @@ exports.decryptPaste = function(req, res,next ){
         if (result[0] === undefined) return next();
         console.log(result[0].secret);
         if (result[0].secret === crypto.createHash('md5').update(req.body["secret"]).digest("hex")){
-            res.send({ status: 200, content: result[0].text })            
+            res.send({ status: 200, content: cryptoUtils.decrypt(result[0].text,req.body["secret"]) })            
         }else{
             res.send({ status: 400, content: "" })            
         }
