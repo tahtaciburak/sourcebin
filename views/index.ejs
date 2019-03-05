@@ -29,7 +29,7 @@
         </nav>
         <div class="main-content">
           <%if (isEncrypted == false) { %>
-            <textarea class="text-area" onkeyup="textAreaHandler()"><%= content %></textarea>
+            <textarea class="text-area" onkeyup="textAreaHandler()" placeholder="<%= content %>"></textarea>
             <% } else { %>
               <textarea class="text-area" id="decrypted"></textarea>
               <% } %>      
