@@ -1,0 +1,20 @@
+body{
+    background: #053f5e !important;
+}
+
+.text-area{
+    background: #053f5e !important;
+    border-color: #022c43 !important;
+    color: #ffd700 !important;
+    font-size: 15px;  
+    
+}
+
+.text-area::-webkit-input-placeholder{
+    color:#ffd700 !important;
+    opacity: 0.6;
+}
+
+.navbar-dark{
+    background: #115173 !important; 
+}
