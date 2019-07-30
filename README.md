@@ -20,7 +20,7 @@ and you can set an expiration time to your pastes.
 It's easy to share files that are located in your linux file system by using a command line utility called sourcebin-client. For example when you want to share a file you can run this command:
 ```
 cat /path/to/file.txt | sourcebin
-cat /path/to/file.txt | sourcebin --secret <my-secret-here> --exipration <year|month|day|hour|minute>
+cat /path/to/file.txt | sourcebin --secret <my-secret-here> --expiration <year|month|day|hour|minute>
 ```
 
 <img src="http://recordit.co/CypsRme8lv.gif">
